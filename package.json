@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "share": "npx -y cloudflared tunnel --url http://localhost:3000"
   },
   "dependencies": {
     "react": "^18.3.1",

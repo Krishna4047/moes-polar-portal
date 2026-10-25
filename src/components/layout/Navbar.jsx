@@ -16,14 +16,23 @@ import {
   Sparkles,
   ChevronDown,
   Layers,
-  ChevronRight
+  ChevronRight,
+  Smartphone,
+  QrCode,
+  Download,
+  CheckCircle2
 } from 'lucide-react';
+import MobileConnectModal from './MobileConnectModal';
+import { usePWAInstall } from '../../hooks/usePWAInstall';
 
 export default function Navbar({ activeTab, setActiveTab, onOpenSearch }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileConnectOpen, setMobileConnectOpen] = useState(false);
   const [lang, setLang] = useState('EN');
   const dropdownRef = useRef(null);
+
+  const { isInstallable, isInstalled, promptInstall } = usePWAInstall();
 
   // Primary navigation tabs displayed directly in the desktop navbar
   const primaryNavItems = [
@@ -280,8 +289,34 @@ export default function Navbar({ activeTab, setActiveTab, onOpenSearch }) {
               </div>
             </nav>
 
-            {/* Desktop Action buttons (Search & Language) */}
-            <div className="hidden md:flex items-center space-x-3">
+            {/* Desktop Action buttons (Install App, Mobile Connect, Search & Language) */}
+            <div className="hidden md:flex items-center space-x-2.5">
+              <button
+                onClick={() => {
+                  if (isInstallable) {
+                    promptInstall();
+                  } else {
+                    setMobileConnectOpen(true);
+                  }
+                }}
+                className={`flex items-center space-x-1.5 px-3 py-2 rounded-lg border text-xs font-semibold transition shadow-sm group ${
+                  isInstalled
+                    ? 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
+                    : 'bg-cyan-950/80 hover:bg-cyan-900/90 border-cyan-500/50 hover:border-cyan-400 text-cyan-300'
+                }`}
+                title="Install POLARIS on phone or desktop"
+              >
+                {isInstalled ? (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                ) : (
+                  <Download className="w-3.5 h-3.5 text-cyan-400 group-hover:-translate-y-0.5 transition-transform" />
+                )}
+                <span>{isInstalled ? 'App Installed' : 'Install App'}</span>
+                {!isInstalled && (
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                )}
+              </button>
+
               <button
                 onClick={onOpenSearch}
                 className="flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/30 hover:border-cyan-400/60 text-slate-300 hover:text-white text-xs transition shadow-inner group"
@@ -305,6 +340,28 @@ export default function Navbar({ activeTab, setActiveTab, onOpenSearch }) {
 
             {/* Mobile Header Buttons (Touch-friendly 44px) */}
             <div className="flex lg:hidden items-center space-x-2">
+              <button
+                onClick={() => {
+                  if (isInstallable) {
+                    promptInstall();
+                  } else {
+                    setMobileConnectOpen(true);
+                  }
+                }}
+                className={`p-2.5 rounded-xl border active:scale-95 transition ${
+                  isInstalled
+                    ? 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300'
+                    : 'bg-cyan-950/80 border-cyan-500/40 text-cyan-300'
+                }`}
+                aria-label="Install App"
+                title="Install App"
+              >
+                {isInstalled ? (
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                ) : (
+                  <Download className="w-4 h-4 text-cyan-400 animate-bounce" />
+                )}
+              </button>
               <button
                 onClick={onOpenSearch}
                 className="p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-cyan-400 active:scale-95 transition"
@@ -342,6 +399,40 @@ export default function Navbar({ activeTab, setActiveTab, onOpenSearch }) {
               </div>
               <span className="text-[10px] text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-500/30">Ctrl+K</span>
             </button>
+
+            {/* Mobile Install App Card */}
+            <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/80 via-[#0a1e3a] to-blue-950/80 border border-cyan-500/40 flex items-center justify-between shadow-lg">
+              <div className="flex items-center space-x-2.5 min-w-0">
+                <div className="w-8 h-8 rounded-lg bg-[#040D1A] border border-cyan-400/40 p-1 flex items-center justify-center shrink-0">
+                  <img src="./icons/icon.svg" alt="POLARIS" className="w-full h-full object-contain" />
+                </div>
+                <div className="truncate">
+                  <div className="text-xs font-bold text-white flex items-center space-x-1.5">
+                    <span>POLARIS Mobile App</span>
+                    <span className="text-[9px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.2 rounded font-mono">PWA</span>
+                  </div>
+                  <p className="text-[10px] text-slate-300 truncate">Install to phone home screen</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (isInstallable) {
+                    promptInstall();
+                  } else {
+                    setMobileConnectOpen(true);
+                  }
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold shadow flex items-center space-x-1 shrink-0 ${
+                  isInstalled
+                    ? 'bg-emerald-600/30 text-emerald-300 border border-emerald-500/30'
+                    : 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white'
+                }`}
+              >
+                {isInstalled ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Download className="w-3.5 h-3.5" />}
+                <span>{isInstalled ? 'Installed' : 'Install'}</span>
+              </button>
+            </div>
 
             {/* Section 1: Core Modules */}
             <div>
@@ -505,6 +596,12 @@ export default function Navbar({ activeTab, setActiveTab, onOpenSearch }) {
           </span>
         </button>
       </nav>
+
+      {/* Mobile Connect / Cross-Device Modal */}
+      <MobileConnectModal 
+        isOpen={mobileConnectOpen} 
+        onClose={() => setMobileConnectOpen(false)} 
+      />
     </>
   );
 }

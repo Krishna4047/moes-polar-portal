@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#071e3d" />
+      <stop offset="60%" stop-color="#040d1a" />
+      <stop offset="100%" stop-color="#02060d" />
+    </radialGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="iceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#bae6fd" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
+  <rect width="504" height="504" x="4" y="4" rx="106" fill="none" stroke="#38bdf8" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Outer Dial Compass Rings -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#0ea5e9" stroke-width="3" stroke-opacity="0.3" stroke-dasharray="6 8" />
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.5" />
+  <circle cx="256" cy="256" r="135" fill="#04152b" fill-opacity="0.7" stroke="#0284c7" stroke-width="2" />
+
+  <!-- Polar Compass Star / Needle -->
+  <!-- North (Ice Cyan) -->
+  <polygon points="256,76 276,236 256,256" fill="url(#iceGrad)" filter="url(#glow)" />
+  <polygon points="256,76 236,236 256,256" fill="#38bdf8" />
+
+  <!-- South (Navy Deep) -->
+  <polygon points="256,436 276,276 256,256" fill="#0369a1" />
+  <polygon points="256,436 236,276 256,256" fill="#0c4a6e" />
+
+  <!-- East (Cyan Light) -->
+  <polygon points="436,256 276,276 256,256" fill="#7dd3fc" />
+  <polygon points="436,256 276,236 256,256" fill="#38bdf8" />
+
+  <!-- West (Cyan Medium) -->
+  <polygon points="76,256 236,276 256,256" fill="#0284c7" />
+  <polygon points="76,256 236,236 256,256" fill="#0369a1" />
+
+  <!-- Center Pivot Core -->
+  <circle cx="256" cy="256" r="28" fill="#082f49" stroke="#38bdf8" stroke-width="4" />
+  <circle cx="256" cy="256" r="14" fill="#f8fafc" />
+  <circle cx="256" cy="256" r="6" fill="#0284c7" />
+
+  <!-- Golden Polaris Indicator Star (North) -->
+  <circle cx="256" cy="95" r="7" fill="#f59e0b" filter="url(#glow)" />
+
+  <!-- Subtle Latitude / Longitude Graticules -->
+  <ellipse cx="256" cy="256" rx="165" ry="60" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.25" />
+  <line x1="256" y1="91" x2="256" y2="421" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.3" stroke-dasharray="4 4" />
+</svg>

@@ -1,0 +1,67 @@
+{
+  "name": "POLARIS - MoES Polar Science Portal",
+  "short_name": "POLARIS",
+  "description": "Ministry of Earth Sciences (MoES) India Polar Science Outreach, Station Telemetry & Knowledge Repository",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#040D1A",
+  "theme_color": "#061325",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "science", "government"],
+  "shortcuts": [
+    {
+      "name": "Polar Stations",
+      "short_name": "Stations",
+      "description": "View Bharati, Maitri, Himadri live status",
+      "url": "./#stations",
+      "icons": [{ "src": "icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Interactive Polar Map",
+      "short_name": "Map",
+      "description": "Explore Antarctica and Arctic stations",
+      "url": "./#map",
+      "icons": [{ "src": "icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "DhruvAI Polar Assistant",
+      "short_name": "DhruvAI",
+      "description": "Ask polar expedition and science questions",
+      "url": "./#ai",
+      "icons": [{ "src": "icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
